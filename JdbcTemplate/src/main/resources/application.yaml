@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${BD}
+    username: ${USER}
+    password: ${PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      connection-timeout: 60000
+      minimum-idle: 10
+
+
+# hicariConfig
+#      https://github:
+#        com/brettwooldridge/HikariCP?tab=readme-ov-file#gear-configuration-knobs-baby:
