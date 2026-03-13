@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/")
 @AllArgsConstructor
@@ -45,11 +47,19 @@ public class UserController {
 
     @PatchMapping
     @RequestMapping("patch")
-    public ResponseEntity<Void> get(@RequestBody UserDto userDto){
+    public ResponseEntity<Void> update(@RequestBody UserDto userDto){
         if (userService.updateUser(UserMapper.toEntity(userDto))){
             return ResponseEntity.ok().build();
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    @GetMapping
+    @RequestMapping("get-all")
+    public ResponseEntity<List<UserDto>> getAll(){
+        List<UserDto> userDtos= userService.readAll().stream().map(UserMapper::userDto).toList();
+        return ResponseEntity.ok().body(userDtos);
+    }
+
 }

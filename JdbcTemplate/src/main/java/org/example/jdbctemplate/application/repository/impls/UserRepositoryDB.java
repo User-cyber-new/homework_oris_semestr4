@@ -8,7 +8,11 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 @AllArgsConstructor
@@ -44,4 +48,12 @@ public class UserRepositoryDB implements CRUDRepository<UserEntity> {
         String sql = "DELETE FROM users where id=:id";
         return namedParameterJdbcTemplate.update(sql, Collections.singletonMap("id", id)) > 0;
     }
+
+    @Override
+    public List<UserEntity> getAll() {
+        String sql = "SELECT * FROM users";
+
+        return namedParameterJdbcTemplate.query(sql, (rs, rowNum) -> new UserEntity(rs.getInt("id"), rs.getInt("age"), rs.getString("fullname")));
+    }
+
 }
