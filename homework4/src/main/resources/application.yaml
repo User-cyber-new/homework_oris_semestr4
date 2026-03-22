@@ -1,0 +1,12 @@
+spring:
+  application:
+    name:
+      homework4
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${BD}
+    username: ${USER}
+    password: ${PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      connection-timeout: 60000
+      minimum-idle: 10
