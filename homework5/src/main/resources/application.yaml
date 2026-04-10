@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: homework5
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${DB}
+    username: ${USER}
+    password: ${PASS}
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.yaml
